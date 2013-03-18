@@ -174,5 +174,6 @@ public class ShowYolo extends JFrame {
 				s="Det här är en säker plats";
 			}
 			return s;
+			//testing
 	}
 }
