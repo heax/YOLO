@@ -78,11 +78,11 @@ public class ShowYolo extends JFrame {
 		contentPane.setLayout(null);
 		
 		final JLabel label = new JLabel("");
-		label.setBounds(171, 137, 164, 27);
+		label.setBounds(118, 150, 250, 27);
 		contentPane.add(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(171, 183, 171, 27);
+		lblNewLabel_2.setBounds(153, 216, 150, 27);
 		contentPane.add(lblNewLabel_2);
 		
 		final JComboBox comboBox = new JComboBox(areaNames);
@@ -99,7 +99,7 @@ public class ShowYolo extends JFrame {
 				getInfo(comboBox.getSelectedItem().toString());
 				//label.setText(getTitle(comboBox.getSelectedItem().toString()));
 				if(crimeList.isEmpty()){
-					System.out.println("Ingen beskrivning");
+					label.setText("Det här är en säker plats");
 				}else{
 				label.setText(crimeList.get(0).getLocation());
 				lblNewLabel_2.setText(crimeList.get(0).getDescrption());
@@ -118,7 +118,7 @@ public class ShowYolo extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Desktop\\batman klar.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Documents\\GitHub\\YOLO\\src\\pics\\sailor moon klar.png"));
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
 		
@@ -204,6 +204,7 @@ public class ShowYolo extends JFrame {
 					crimeList.add(c);
 					s2 = s2+list2.item(0).getNodeValue()+"<br/>";
 					System.out.println(s2);
+				} else {
 				}
 			}
 			
