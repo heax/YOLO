@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ import java.awt.Color;
 public class ShowYolo extends JFrame {
 
 	private JPanel contentPane;
+	private ArrayList<Crime> crimeList;
 	private String s;
 	Document document;
 	String[] areaNames = {"Välj stad...", "Bjuv", "Bromölla", "Burlöv", "Båstad", "Eslöv", "Helsingborg",
@@ -66,6 +68,8 @@ public class ShowYolo extends JFrame {
 	 * Create the frame.
 	 */
 	public ShowYolo() {
+		crimeList = new ArrayList<Crime>();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 419, 445);
 		contentPane = new JPanel();
@@ -73,12 +77,13 @@ public class ShowYolo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(170, 129, 173, 107);
-		contentPane.add(scrollPane);
+		final JLabel label = new JLabel("");
+		label.setBounds(171, 137, 164, 27);
+		contentPane.add(label);
 		
-		final JTextPane textPane = new JTextPane();
-		scrollPane.setViewportView(textPane);
+		final JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(171, 183, 171, 27);
+		contentPane.add(lblNewLabel_2);
 		
 		final JComboBox comboBox = new JComboBox(areaNames);
 		comboBox.setForeground(Color.YELLOW);
@@ -89,9 +94,16 @@ public class ShowYolo extends JFrame {
 		//comboBox.setOpaque(false);
 		comboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				textPane.setText(getTitle(comboBox.getSelectedItem().toString()));
+				//textPane.setText(getTitle(comboBox.getSelectedItem().toString()));
 				System.out.println(comboBox.getSelectedItem().toString());
-				textPane.setCaretPosition(0);
+				getInfo(comboBox.getSelectedItem().toString());
+				//label.setText(getTitle(comboBox.getSelectedItem().toString()));
+				if(crimeList.isEmpty()){
+					System.out.println("Ingen beskrivning");
+				}else{
+				label.setText(crimeList.get(0).getLocation());
+				lblNewLabel_2.setText(crimeList.get(0).getDescrption());
+				}
 			}	
 		});
 		
@@ -150,7 +162,31 @@ public class ShowYolo extends JFrame {
 	}
 	
 	public String getTitle(String cityName){
-		String s = "";
+		String s = "<html>";
+		NodeList rootElement = document.getElementsByTagName("title");
+		for(int i = 1; i < rootElement.getLength(); i ++){
+			Element element = (Element) rootElement.item(i);
+			NodeList list = element.getChildNodes();
+			if(list.item(0).getNodeValue().indexOf("Sammanfattning") > -1){
+				System.out.println("Här var det sammanfattning");
+			} else {
+				if(list.item(0).getNodeValue().indexOf(cityName) > -1){
+				s = s+list.item(0).getNodeValue()+"<br/>";
+				System.out.println(s);
+				
+				}
+			}
+		}
+			System.out.println(s);
+			if(s == ""){
+				s="Det här är en säker plats";
+			}
+			return s+"</html>";
+	}
+	
+	public String getInfo(String cityName){
+		crimeList.clear();
+		String s2 = "<html>";
 		NodeList rootElement = document.getElementsByTagName("title");
 		NodeList rootElement2 = document.getElementsByTagName("description");
 		for(int i = 1; i < rootElement.getLength(); i ++){
@@ -162,17 +198,16 @@ public class ShowYolo extends JFrame {
 				System.out.println("Här var det sammanfattning");
 			} else {
 				if(list.item(0).getNodeValue().indexOf(cityName) > -1){
-				s = s+list.item(0).getNodeValue()+"\n"+list2.item(0).getNodeValue()+"\n"+"\n";
-			
-				System.out.println(s);
+					Crime c = new Crime();
+					c.setLocation(list.item(0).getNodeValue());
+					c.setDescrption(list2.item(0).getNodeValue());
+					crimeList.add(c);
+					s2 = s2+list2.item(0).getNodeValue()+"<br/>";
+					System.out.println(s2);
 				}
 			}
 			
 		}
-			System.out.println(s);
-			if(s == ""){
-				s="Det här är en säker plats";
-			}
-			return s;
+			return s2+"</html>";
 	}
 }
