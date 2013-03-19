@@ -47,6 +47,9 @@ public class ShowYolo extends JFrame {
 			"Landskrona", "Lomma", "Lund", "Malmö", "Osby", "Perstorp", "Simrishamn", "Sjöbo", "Skurup",
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
+	
+	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
+	ImageIcon sailor1 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest1.png"));
 
 	/**
 	 * Launch the application.
@@ -76,6 +79,14 @@ public class ShowYolo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		MyBatButt myBatButt = new MyBatButt(batman1);
+		myBatButt.setBounds(207, 303, 85, 84);
+		contentPane.add(myBatButt);
+		
+		mySailorButt mySailorButt_ = new mySailorButt(sailor1);
+		mySailorButt_.setBounds(304, 303, 85, 84);
+		contentPane.add(mySailorButt_);
 		
 		final JLabel label = new JLabel("");
 		label.setBounds(118, 150, 250, 27);
