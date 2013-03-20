@@ -80,12 +80,8 @@ public class ShowYolo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		MyBatButt myBatButt = new MyBatButt(batman1);
-		myBatButt.setBounds(207, 303, 85, 84);
-		contentPane.add(myBatButt);
-		
 		mySailorButt mySailorButt_ = new mySailorButt(sailor1);
-		mySailorButt_.setBounds(304, 303, 85, 84);
+		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
 		
 		final JLabel label = new JLabel("");
