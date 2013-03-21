@@ -147,6 +147,7 @@ public class ShowYolo extends JFrame {
 		createParser();
 		
 		lblNewLabel = new JLabel(bgBat);
+		lblNewLabel.setForeground(Color.YELLOW);
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
 		
