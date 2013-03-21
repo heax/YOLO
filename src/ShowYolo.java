@@ -177,7 +177,8 @@ public class ShowYolo extends JFrame {
                      e.printStackTrace();
                  }
 	}
-	
+	//annars?
+	//(ﾉಥ益ಥ）ﾉ﻿ ┻━┻
 	public String getTitle(String cityName){
 		String s = "<html>";
 		NodeList rootElement = document.getElementsByTagName("title");
