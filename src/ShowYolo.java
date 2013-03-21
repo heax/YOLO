@@ -52,7 +52,7 @@ public class ShowYolo extends JFrame {
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
 	
-	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moonklar.png"));
+	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailormoonklar.png"));
 	ImageIcon bgBat = new ImageIcon(getClass().getResource("/pics/batman.png"));
 	
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
@@ -89,7 +89,7 @@ public class ShowYolo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		mySailorButt mySailorButt_ = new mySailorButt(sailor1);
+		mySailorButt mySailorButt_ = new mySailorButt(sailor1, this);
 		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
 		
@@ -238,5 +238,11 @@ public class ShowYolo extends JFrame {
 			
 		}
 			return s2+"</html>";
+	}
+
+	public void setBackGround(String string) {
+		// TODO Auto-generated method stub
+		System.out.println(string);
+		
 	}
 }
