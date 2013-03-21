@@ -24,6 +24,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
+import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
@@ -32,6 +34,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JRadioButton;
 
 
 
@@ -48,8 +51,13 @@ public class ShowYolo extends JFrame {
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
 	
+	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moon klar.png"));
+	ImageIcon bgBat = new ImageIcon(getClass().getResource("/pics/batman.png"));
+	
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
 	ImageIcon sailor1 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest1.png"));
+	
+	
 
 	/**
 	 * Launch the application.
@@ -84,9 +92,17 @@ public class ShowYolo extends JFrame {
 		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
 		
+		System.out.println(mySailorButt_.isSailorChosen());
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(118, 150, 250, 27);
+		contentPane.add(scrollPane);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.getViewport().setBackground(Color.WHITE);
+		
 		final JLabel label = new JLabel("");
-		label.setBounds(118, 150, 250, 27);
-		contentPane.add(label);
+		scrollPane.setViewportView(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(153, 216, 150, 27);
@@ -95,10 +111,8 @@ public class ShowYolo extends JFrame {
 		final JComboBox comboBox = new JComboBox(areaNames);
 		comboBox.setForeground(Color.YELLOW);
 		comboBox.setBackground(Color.BLACK);
-		comboBox.setBounds(206, 28, 106, 27);
+		comboBox.setBounds(245, 13, 106, 27);
 		contentPane.add(comboBox);
-		//comboBox.setEditable(true);
-		//comboBox.setOpaque(false);
 		comboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				//textPane.setText(getTitle(comboBox.getSelectedItem().toString()));
@@ -107,6 +121,7 @@ public class ShowYolo extends JFrame {
 				//label.setText(getTitle(comboBox.getSelectedItem().toString()));
 				if(crimeList.isEmpty()){
 					label.setText("Det här är en säker plats");
+					lblNewLabel_2.setText("");
 				}else{
 				label.setText(crimeList.get(0).getLocation());
 				lblNewLabel_2.setText(crimeList.get(0).getDescrption());
@@ -116,20 +131,10 @@ public class ShowYolo extends JFrame {
 		
 		
 		createParser();
-		//textPane.setText(getTitle());
 		
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Desktop\\liten battis.png"));
-		lblNewLabel_1.setBounds(185, 0, 150, 84);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Documents\\GitHub\\YOLO\\src\\pics\\sailor moon klar.png"));
+		JLabel lblNewLabel = new JLabel(bgSail);
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
-		
-		
 		
 		
 	}

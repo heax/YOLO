@@ -11,10 +11,11 @@ import javax.swing.JButton;
 public class mySailorButt extends JButton implements ActionListener {
 	
 	private boolean sailorChosen = false;
-	
+
 	ImageIcon sailor1 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest1.png"));
 	ImageIcon sailor2 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest2.png"));
 	ImageIcon sailor3 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest3.png"));
+
 	ImageIcon sailor4 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest4.png"));
 	
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
@@ -47,6 +48,15 @@ public class mySailorButt extends JButton implements ActionListener {
 		super(text, icon);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public boolean isSailorChosen() {
+		return sailorChosen;
+	}
+
+	public void setSailorChosen(boolean sailorChosen) {
+		this.sailorChosen = sailorChosen;
+	}
+	
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -56,10 +66,12 @@ public class mySailorButt extends JButton implements ActionListener {
 			setIcon(batman1);
 			setRolloverIcon(batman2);
 			setPressedIcon(batman3);
+			setBorderPainted(false);
 		}else{
 			setIcon(sailor1);
 			setRolloverIcon(sailor3);
 			setPressedIcon(sailor2);
+			setBorderPainted(false);
 		}
 	}
 
@@ -67,9 +79,7 @@ public class mySailorButt extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		sailorChosen = !sailorChosen;
-		System.out.println("Sailor moon: "+sailorChosen);
+		//System.out.println("Sailor moon: "+sailorChosen);
 	}
-
-
 
 }
