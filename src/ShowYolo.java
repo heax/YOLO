@@ -1,5 +1,3 @@
-import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -15,27 +12,18 @@ import java.util.StringTokenizer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent;
-import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import javax.swing.BorderFactory;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JRadioButton;
 
 
 
@@ -94,14 +82,14 @@ public class ShowYolo extends JFrame {
 		contentPane.add(mySailorButt_);
 		
 		
-		System.out.println(mySailorButt_.isSailorChosen());
-		
 		
 		final JLabel label = new JLabel("");
+		label.setForeground(Color.YELLOW);
 		label.setBounds(221, 153, 147, 61);
 		contentPane.add(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setForeground(Color.YELLOW);
 		lblNewLabel_2.setBounds(221, 213, 155, 67);
 		contentPane.add(lblNewLabel_2);
 		
@@ -144,15 +132,10 @@ public class ShowYolo extends JFrame {
 				}
 			}	
 		});
-		
-		
 		createParser();
-		
 		JLabel lblNewLabel = new JLabel(bgSail);
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
-		
-		
 	}
 
 

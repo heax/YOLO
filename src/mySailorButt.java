@@ -6,6 +6,7 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 
 public class mySailorButt extends JButton implements ActionListener {
@@ -15,13 +16,15 @@ public class mySailorButt extends JButton implements ActionListener {
 	ImageIcon sailor1 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest1.png"));
 	ImageIcon sailor2 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest2.png"));
 	ImageIcon sailor3 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest3.png"));
-
 	ImageIcon sailor4 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest4.png"));
 	
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
 	ImageIcon batman2 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest2.png"));
 	ImageIcon batman3 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest3.png"));
 	ImageIcon batman4 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest4.png"));
+	
+	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moonklar.png"));
+	ImageIcon bgBat = new ImageIcon(getClass().getResource("/pics/batman.png"));
 
 	public mySailorButt() {
 	}
@@ -79,7 +82,9 @@ public class mySailorButt extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		sailorChosen = !sailorChosen;
+		
 		//System.out.println("Sailor moon: "+sailorChosen);
+		
 	}
 
 }
