@@ -98,11 +98,11 @@ public class ShowYolo extends JFrame {
 		
 		
 		final JLabel label = new JLabel("");
-		label.setBounds(215, 153, 153, 61);
+		label.setBounds(221, 153, 147, 61);
 		contentPane.add(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(215, 211, 153, 61);
+		lblNewLabel_2.setBounds(221, 213, 155, 67);
 		contentPane.add(lblNewLabel_2);
 		
 		
