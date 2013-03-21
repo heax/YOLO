@@ -85,19 +85,19 @@ public class ShowYolo extends JFrame {
 		
 		final JLabel label = new JLabel("");
 		label.setForeground(Color.YELLOW);
-		label.setBounds(221, 153, 147, 61);
+		label.setBounds(205, 153, 163, 61);
 		contentPane.add(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setForeground(Color.YELLOW);
-		lblNewLabel_2.setBounds(221, 213, 155, 67);
+		lblNewLabel_2.setBounds(205, 213, 171, 67);
 		contentPane.add(lblNewLabel_2);
 		
 		
 		final JComboBox comboBox = new JComboBox(areaNames);
 		comboBox.setForeground(Color.YELLOW);
 		comboBox.setBackground(Color.BLACK);
-		comboBox.setBounds(245, 13, 106, 27);
+		comboBox.setBounds(219, 13, 106, 27);
 		contentPane.add(comboBox);
 		comboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
