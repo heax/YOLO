@@ -31,6 +31,7 @@ import java.awt.Color;
 public class ShowYolo extends JFrame {
 
 	private JPanel contentPane;
+	JLabel lblNewLabel;
 	private ArrayList<Crime> crimeList;
 	private String s;
 	Document document;
@@ -77,12 +78,15 @@ public class ShowYolo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		mySailorButt mySailorButt_ = new mySailorButt(sailor1);
+		mySailorButt mySailorButt_ = new mySailorButt(sailor1, this);
 		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
 		
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> Larskoll
 		final JLabel label = new JLabel("");
 		label.setForeground(Color.YELLOW);
 		label.setBounds(205, 153, 163, 61);
@@ -133,7 +137,12 @@ public class ShowYolo extends JFrame {
 			}	
 		});
 		createParser();
+<<<<<<< HEAD
 		JLabel lblNewLabel = new JLabel(bgSail);
+=======
+		
+		lblNewLabel = new JLabel(bgBat);
+>>>>>>> Larskoll
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
 	}
@@ -220,5 +229,16 @@ public class ShowYolo extends JFrame {
 			
 		}
 			return s2+"</html>";
+	}
+
+	public void setBackGround(String string) {
+		// TODO Auto-generated method stub
+		if (string == "moon"){
+			lblNewLabel.setIcon(bgSail);
+		}else{
+			lblNewLabel.setIcon(bgBat);
+		}
+		System.out.println(string);
+		
 	}
 }

@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 public class mySailorButt extends JButton implements ActionListener {
 	
 	private boolean sailorChosen = false;
+	private ShowYolo showYolo;
+	
 
 	ImageIcon sailor1 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest1.png"));
 	ImageIcon sailor2 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest2.png"));
@@ -29,9 +31,9 @@ public class mySailorButt extends JButton implements ActionListener {
 	public mySailorButt() {
 	}
 
-	public mySailorButt(Icon icon) {
+	public mySailorButt(Icon icon, ShowYolo showYolo) {
 		super(icon);
-		
+		this.showYolo = showYolo;
 		
 		this.addActionListener(this);
 		// TODO Auto-generated constructor stub
@@ -77,12 +79,19 @@ public class mySailorButt extends JButton implements ActionListener {
 			setBorderPainted(false);
 		}
 	}
-
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		sailorChosen = !sailorChosen;
+<<<<<<< HEAD
 		
+=======
+		if (sailorChosen){
+		 showYolo.setBackGround("moon");
+		}else{
+			showYolo.setBackGround("bat");
+		}
+>>>>>>> Larskoll
 		//System.out.println("Sailor moon: "+sailorChosen);
 		
 	}
