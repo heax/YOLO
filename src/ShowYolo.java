@@ -215,7 +215,6 @@ public class ShowYolo extends JFrame {
 					crimeList.add(c);
 					s2 = s2+list2.item(0).getNodeValue()+"<br/>";
 					//System.out.println(s2);
-				} else {
 				}
 			}
 			
