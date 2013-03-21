@@ -43,6 +43,7 @@ import javax.swing.JRadioButton;
 public class ShowYolo extends JFrame {
 
 	private JPanel contentPane;
+	JLabel lblNewLabel;
 	private ArrayList<Crime> crimeList;
 	private String s;
 	Document document;
@@ -52,7 +53,7 @@ public class ShowYolo extends JFrame {
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
 	
-	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailormoonklar.png"));
+	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moonklar.png"));
 	ImageIcon bgBat = new ImageIcon(getClass().getResource("/pics/batman.png"));
 	
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
@@ -92,9 +93,6 @@ public class ShowYolo extends JFrame {
 		mySailorButt mySailorButt_ = new mySailorButt(sailor1, this);
 		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
-		
-		
-		System.out.println(mySailorButt_.isSailorChosen());
 		
 		
 		final JLabel label = new JLabel("");
@@ -148,7 +146,7 @@ public class ShowYolo extends JFrame {
 		
 		createParser();
 		
-		JLabel lblNewLabel = new JLabel(bgSail);
+		lblNewLabel = new JLabel(bgBat);
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
 		
@@ -242,6 +240,11 @@ public class ShowYolo extends JFrame {
 
 	public void setBackGround(String string) {
 		// TODO Auto-generated method stub
+		if (string == "moon"){
+			lblNewLabel.setIcon(bgSail);
+		}else{
+			lblNewLabel.setIcon(bgBat);
+		}
 		System.out.println(string);
 		
 	}
