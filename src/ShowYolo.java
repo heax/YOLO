@@ -10,6 +10,7 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -92,21 +93,18 @@ public class ShowYolo extends JFrame {
 		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
 		
+		
 		System.out.println(mySailorButt_.isSailorChosen());
 		
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(118, 150, 250, 27);
-		contentPane.add(scrollPane);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.getViewport().setBackground(Color.WHITE);
-		
 		final JLabel label = new JLabel("");
-		scrollPane.setViewportView(label);
+		label.setBounds(206, 153, 145, 45);
+		contentPane.add(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(153, 216, 150, 27);
+		lblNewLabel_2.setBounds(208, 196, 125, 42);
 		contentPane.add(lblNewLabel_2);
+		
 		
 		final JComboBox comboBox = new JComboBox(areaNames);
 		comboBox.setForeground(Color.YELLOW);
@@ -115,16 +113,25 @@ public class ShowYolo extends JFrame {
 		contentPane.add(comboBox);
 		comboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				//textPane.setText(getTitle(comboBox.getSelectedItem().toString()));
-				System.out.println(comboBox.getSelectedItem().toString());
+				
+				//System.out.println(comboBox.getSelectedItem().toString());
 				getInfo(comboBox.getSelectedItem().toString());
-				//label.setText(getTitle(comboBox.getSelectedItem().toString()));
+				
 				if(crimeList.isEmpty()){
 					label.setText("Det här är en säker plats");
 					lblNewLabel_2.setText("");
 				}else{
-				label.setText(crimeList.get(0).getLocation());
-				lblNewLabel_2.setText(crimeList.get(0).getDescrption());
+					//System.out.println(crimeList.get(0).getDescrption());
+					StringTokenizer st = crimeList.get(0).getCrimes();
+					String s ="<html>";
+					while (st.hasMoreElements()) {
+						//System.out.println(st.nextElement());
+						s=s+st.nextElement()+"<br>";
+					}
+					s=s+"</html>";
+					System.out.println("Detta är s: "+s);
+					label.setText(crimeList.get(0).getLocation());
+					lblNewLabel_2.setText(s);
 				}
 			}	
 		});
@@ -158,8 +165,8 @@ public class ShowYolo extends JFrame {
          
 			int start = xml.indexOf("<?xml version=");
 			xml = xml.substring(start); //det var lite skräp i b�rjan st�da det
-			System.out.println("XML IGEN p� en rad...------------------------");
-			System.out.println(xml);
+			//System.out.println("XML IGEN p� en rad...------------------------");
+			//System.out.println(xml);
          DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
          DocumentBuilder builder = null;
             
@@ -184,7 +191,7 @@ public class ShowYolo extends JFrame {
 			} else {
 				if(list.item(0).getNodeValue().indexOf(cityName) > -1){
 				s = s+list.item(0).getNodeValue()+"<br/>";
-				System.out.println(s);
+				//System.out.println(s);
 				
 				}
 			}
@@ -207,7 +214,7 @@ public class ShowYolo extends JFrame {
 			NodeList list = element.getChildNodes();
 			NodeList list2 = element2.getChildNodes();
 			if(list.item(0).getNodeValue().indexOf("Sammanfattning") > -1){
-				System.out.println("Här var det sammanfattning");
+				//System.out.println("Här var det sammanfattning");
 			} else {
 				if(list.item(0).getNodeValue().indexOf(cityName) > -1){
 					Crime c = new Crime();
@@ -215,7 +222,7 @@ public class ShowYolo extends JFrame {
 					c.setDescrption(list2.item(0).getNodeValue());
 					crimeList.add(c);
 					s2 = s2+list2.item(0).getNodeValue()+"<br/>";
-					System.out.println(s2);
+					//System.out.println(s2);
 				} else {
 				}
 			}

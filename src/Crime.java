@@ -1,14 +1,16 @@
+import java.util.StringTokenizer;
+
 
 public class Crime {
 	private String location;
-	private String descrption;
+	private String description;
 	
 	public String getDescrption() {
-		return descrption;
+		return description;
 	}
 
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
+	public void setDescrption(String description) {
+		this.description = description;
 	}
 	
 	public String getLocation() {
@@ -17,6 +19,14 @@ public class Crime {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	
+	public StringTokenizer getCrimes(){	
+		System.out.println(description);
+		StringTokenizer st2 = new StringTokenizer(description, ",");
+		 return st2;
+	
 	}
 
 	
