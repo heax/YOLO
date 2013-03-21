@@ -22,12 +22,19 @@ public class Crime {
 	}
 	
 	
-	public StringTokenizer getCrimes(){	
+	public StringTokenizer getCrimeDescription(){	
 		System.out.println(description);
 		StringTokenizer st2 = new StringTokenizer(description, ",");
 		 return st2;
 	
 	}
+	
+	public StringTokenizer getCrimeLocation(){
+		StringTokenizer st2 = new StringTokenizer(location, ",");
+		return st2;
+	}
+	
+
 
 	
 

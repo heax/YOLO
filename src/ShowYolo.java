@@ -52,7 +52,7 @@ public class ShowYolo extends JFrame {
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
 	
-	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moon klar.png"));
+	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moonklar.png"));
 	ImageIcon bgBat = new ImageIcon(getClass().getResource("/pics/batman.png"));
 	
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
@@ -98,11 +98,11 @@ public class ShowYolo extends JFrame {
 		
 		
 		final JLabel label = new JLabel("");
-		label.setBounds(206, 153, 145, 45);
+		label.setBounds(215, 153, 153, 61);
 		contentPane.add(label);
 		
 		final JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(208, 196, 125, 42);
+		lblNewLabel_2.setBounds(215, 211, 153, 61);
 		contentPane.add(lblNewLabel_2);
 		
 		
@@ -122,15 +122,24 @@ public class ShowYolo extends JFrame {
 					lblNewLabel_2.setText("");
 				}else{
 					//System.out.println(crimeList.get(0).getDescrption());
-					StringTokenizer st = crimeList.get(0).getCrimes();
+					StringTokenizer st = crimeList.get(0).getCrimeDescription();
 					String s ="<html>";
 					while (st.hasMoreElements()) {
 						//System.out.println(st.nextElement());
 						s=s+st.nextElement()+"<br>";
 					}
 					s=s+"</html>";
+					
+					StringTokenizer st2 = crimeList.get(0).getCrimeLocation();
+					String s2 ="<html>";
+					while(st2.hasMoreElements()){
+						s2=s2+st2.nextElement()+"<br>";
+					}
+					s2=s2+"</html>";
+					
 					System.out.println("Detta är s: "+s);
-					label.setText(crimeList.get(0).getLocation());
+					System.out.println("Detta är s2: "+s2);
+					label.setText(s2);
 					lblNewLabel_2.setText(s);
 				}
 			}	
