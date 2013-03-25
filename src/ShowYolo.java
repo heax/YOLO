@@ -7,7 +7,11 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,17 +39,27 @@ public class ShowYolo extends JFrame {
 	private ArrayList<Crime> crimeList;
 	private String s;
 	Document document;
+	
+	//Lista med alla orter man kan välja mellan
 	String[] areaNames = {"Välj stad...", "Bjuv", "Bromölla", "Burlöv", "Båstad", "Eslöv", "Helsingborg",
 			"Hässleholm", "Höganäs", "Hörby", "Höör", "Klippan", "Kristianstad", "Kävlinge",
 			"Landskrona", "Lomma", "Lund", "Malmö", "Osby", "Perstorp", "Simrishamn", "Sjöbo", "Skurup",
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
 	
+	//Bilder för bakgrunden
 	ImageIcon bgSail = new ImageIcon(getClass().getResource("/pics/sailor moonklar.png"));
 	ImageIcon bgBat = new ImageIcon(getClass().getResource("/pics/batman.png"));
+	ImageIcon bgSailan = new ImageIcon(getClass().getResource("/pics/sailan.png"));
+	ImageIcon bgBatteman = new ImageIcon(getClass().getResource("/pics/batteman.png"));
 	
+	//Bilder till knappen
 	ImageIcon batman1 = new ImageIcon(getClass().getResource("/pics/batmanbuttontest1.png"));
 	ImageIcon sailor1 = new ImageIcon(getClass().getResource("/pics/sailormoonknapptest1.png"));
+	private JLabel lblNewLabel_1;
+	private JComboBox comboBox;
+	private JLabel label;
+	private JLabel lblNewLabel_2;
 	
 	
 
@@ -69,6 +83,7 @@ public class ShowYolo extends JFrame {
 	 * Create the frame.
 	 */
 	public ShowYolo() {
+		//En arrayList som vi fyller med Crime
 		crimeList = new ArrayList<Crime>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,46 +93,51 @@ public class ShowYolo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setForeground(Color.YELLOW);
+		lblNewLabel_1.setBounds(12, 360, 163, 27);
+		contentPane.add(lblNewLabel_1);
+		
 		mySailorButt mySailorButt_ = new mySailorButt(sailor1, this);
 		mySailorButt_.setBounds(305, 326, 63, 61);
 		contentPane.add(mySailorButt_);
 		
 		
-		final JLabel label = new JLabel("");
+		label = new JLabel("");
 		label.setForeground(Color.YELLOW);
 		label.setBounds(215, 153, 153, 61);
 		contentPane.add(label);
 		
-		final JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setForeground(Color.YELLOW);
 		lblNewLabel_2.setBounds(215, 211, 153, 61);
 		contentPane.add(lblNewLabel_2);
 		
 		
-		final JComboBox comboBox = new JComboBox(areaNames);
+		comboBox = new JComboBox(areaNames);
 		comboBox.setForeground(Color.YELLOW);
 		comboBox.setBackground(Color.BLACK);
 		comboBox.setBounds(245, 13, 106, 27);
 		contentPane.add(comboBox);
+		
+		//ComboBoxen där man väljer sin ort och kod för att hämta information för den orten
 		comboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//System.out.println(comboBox.getSelectedItem().toString());
-				getInfo(comboBox.getSelectedItem().toString());
+				getInfo(comboBox.getSelectedItem().toString());//Hämta det valda namnet från comboboxen
 				
-				if(crimeList.isEmpty()){
+				if(crimeList.isEmpty()){    //Om det inte finns några Crime så visas det att platsen är säker
 					label.setText("Det här är en säker plats");
 					lblNewLabel_2.setText("");
 				}else{
-					//System.out.println(crimeList.get(0).getDescrption());
+					//Hämta description och printa ut i JLabel
 					StringTokenizer st = crimeList.get(0).getCrimeDescription();
-					String s ="<html>";
+					String s ="<html>";  //Eftersom det är en JLabel måste det vara html för att man ska kunna byta rad
 					while (st.hasMoreElements()) {
-						//System.out.println(st.nextElement());
-						s=s+st.nextElement()+"<br>";
+						s=s+st.nextElement()+"<br>"; //Byt rad med <br>
 					}
 					s=s+"</html>";
-					
+					//Hämta location och gör samma sak som med description
 					StringTokenizer st2 = crimeList.get(0).getCrimeLocation();
 					String s2 ="<html>";
 					while(st2.hasMoreElements()){
@@ -125,8 +145,8 @@ public class ShowYolo extends JFrame {
 					}
 					s2=s2+"</html>";
 					
-					System.out.println("Detta är s: "+s);
-					System.out.println("Detta är s2: "+s2);
+					
+					//s är description och s2 är location
 					label.setText(s2);
 					lblNewLabel_2.setText(s);
 				}
@@ -134,18 +154,21 @@ public class ShowYolo extends JFrame {
 		});
 		
 		
-		createParser();
-		
 		lblNewLabel = new JLabel(bgBat);
 		lblNewLabel.setForeground(Color.YELLOW);
 		lblNewLabel.setBounds(0, 0, 400, 400);
 		contentPane.add(lblNewLabel);
 		
+		Timer timer = new Timer();
+		MyTask t = new MyTask(); //Den inre klassen nedan
+		//Update every minute
+		timer.schedule(t, 0, 60000);
 		
 	}
 
 
 	public void createParser() {
+		//parsea parsea parsea
 		 URL url;
 		try {
 			url = new  URL("http://www.polisen.se/Skane/Aktuellt/RSS/Lokal-RSS---Handelser/Lokala-RSS-listor1/Handelser-RSS---Skane/?feed=rss");
@@ -234,10 +257,60 @@ public class ShowYolo extends JFrame {
 		// TODO Auto-generated method stub
 		if (string == "moon"){
 			lblNewLabel.setIcon(bgSail);
+			
 		}else{
 			lblNewLabel.setIcon(bgBat);
+			
 		}
 		System.out.println(string);
 		
 	}
+		
+		
+		private class MyTask extends TimerTask {
+			public void run() {
+			createParser();
+			System.out.println("New Parse");
+			
+			//Create a calendar
+			Calendar c = Calendar.getInstance();
+			
+			//Get the hour and minte and print it out like a clock (HH:MM)
+			lblNewLabel_1.setText("Senast uppdaterat: "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE));
+			
+			
+			//Gör samma sak som i actionPreformed för comboboxen, dvs skriv i JLabel informationen från xml-en
+			comboBox.getSelectedItem().toString();
+			
+			if(comboBox.getSelectedItem().toString().equals("Välj stad...")){
+				label.setText("");
+			}else{
+				if(crimeList.isEmpty()){  
+					label.setText("Det här är en säker plats");
+					lblNewLabel_2.setText("");
+				}else{
+				
+					StringTokenizer st = crimeList.get(0).getCrimeDescription();
+					String s ="<html>";
+					
+					while (st.hasMoreElements()) {
+						s=s+st.nextElement()+"<br>"; 
+					}
+					s=s+"</html>";
+				
+					StringTokenizer st2 = crimeList.get(0).getCrimeLocation();
+					String s2 ="<html>";
+					
+					while(st2.hasMoreElements()){
+						s2=s2+st2.nextElement()+"<br>";
+					}
+					s2=s2+"</html>";
+				
+				
+					label.setText(s2);
+					lblNewLabel_2.setText(s);
+					}
+				}
+			}
+		}
 }

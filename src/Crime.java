@@ -2,6 +2,9 @@ import java.util.StringTokenizer;
 
 
 public class Crime {
+	//en klass för att sortera informaionen som hämtas från rss-en
+	
+	
 	private String location;
 	private String description;
 	
@@ -21,7 +24,7 @@ public class Crime {
 		this.location = location;
 	}
 	
-	
+	//Två metoder för att göra radbyten istället för kommatecken i texten så att det ska se snyggare ut
 	public StringTokenizer getCrimeDescription(){	
 		System.out.println(description);
 		StringTokenizer st2 = new StringTokenizer(description, ",");
