@@ -10,6 +10,16 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.SplashScreen;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -30,7 +40,6 @@ import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import java.awt.Color;
 
 
 
@@ -39,6 +48,15 @@ public class ShowYolo extends JFrame {
 
 	private JPanel contentPane;
 	private String s;
+    static boolean isRegistered;
+    private static JProgressBar progressBar = new JProgressBar();
+    private static SplashScreen execute;
+    private static int count;
+    private static Timer timer1;
+    private JFrame f; //Main frame
+    private JTextArea ta; // Text area
+	private JScrollPane sbrText; // Scroll pane for text area
+    private JButton btnQuit; // Quit Program
 	Document document;
 	String[] areaNames = {"Välj stad...", "Bjuv", "Bromölla", "Burlöv", "Båstad", "Eslöv", "Helsingborg",
 			"Hässleholm", "Höganäs", "Hörby", "Höör", "Klippan", "Kristianstad", "Kävlinge",
@@ -46,11 +64,87 @@ public class ShowYolo extends JFrame {
 			"Staffanstorp", "Svalöv", "Svedala", "Tomelilla", "Trelleborg", "Vellinge", "Ystad",
 			"Åstorps kommun", "Ängelholm", "Örkelljunga", "Östra Göinge"};
 
-	/**
-	 * Launch the application.
-	 */
+	
+	
+	
+	private void loadProgressBar() {
+        ActionListener al = new ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                count++;
+
+                progressBar.setValue(count);
+
+                System.out.println(count);
+
+                if (count == 80) {
+
+            
+                    createFrame();
+               
+
+                   
+
+                    timer1.stop();
+                    
+                }
+
+            }
+
+            private void createFrame() throws HeadlessException {
+        		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        		setBounds(100, 100, 419, 445);
+        		contentPane = new JPanel();
+        		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        		setContentPane(contentPane);
+        		contentPane.setLayout(null);
+        		
+        		JScrollPane scrollPane = new JScrollPane();
+        		scrollPane.setBounds(170, 129, 173, 107);
+        		contentPane.add(scrollPane);
+        		
+        		final JTextPane textPane = new JTextPane();
+        		scrollPane.setViewportView(textPane);
+        		
+        		final JComboBox comboBox = new JComboBox(areaNames);
+        		comboBox.setForeground(Color.YELLOW);
+        		comboBox.setBackground(Color.BLACK);
+        		comboBox.setBounds(206, 28, 106, 27);
+        		contentPane.add(comboBox);
+        		//comboBox.setEditable(true);
+        		//comboBox.setOpaque(false);
+        		comboBox.addActionListener(new ActionListener(){
+        			public void actionPerformed(ActionEvent arg0) {
+        				textPane.setText(getTitle(comboBox.getSelectedItem().toString()));
+        				System.out.println(comboBox.getSelectedItem().toString());
+        				textPane.setCaretPosition(0);
+        			}	
+        		});
+        		
+        		
+        		createParser();
+        		//textPane.setText(getTitle());
+        		
+        		
+        		JLabel lblNewLabel_1 = new JLabel("");
+        		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Desktop\\liten battis.png"));
+        		lblNewLabel_1.setBounds(185, 0, 150, 84);
+        		contentPane.add(lblNewLabel_1);
+        		
+        		JLabel lblNewLabel = new JLabel("");
+        		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Desktop\\batman klar.png"));
+        		lblNewLabel.setBounds(0, 0, 400, 400);
+        		contentPane.add(lblNewLabel);
+            }
+        };
+        timer1 = new Timer(50, al);
+        timer1.start();
+    }
+
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
+
 			public void run() {
 				try {
 					ShowYolo frame = new ShowYolo();
@@ -59,56 +153,50 @@ public class ShowYolo extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		}
+		);
 	}
+	
+	
+	public ShowYolo() {
+
+        Container container = getContentPane();
+        container.setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setBorder(new javax.swing.border.EtchedBorder());
+        panel.setBackground(new Color(255, 255, 255));
+        panel.setBounds(10, 10, 348, 150);
+        panel.setLayout(null);
+        container.add(panel);
+
+        JLabel label = new JLabel("Laddar");
+        label.setFont(new Font("Verdana", Font.BOLD, 14));
+        label.setBounds(113, 52, 348, 30);
+        panel.add(label);
+
+        progressBar.setMaximum(50);
+        progressBar.setBounds(55, 180, 250, 15);
+        container.add(progressBar);
+        loadProgressBar();
+        setSize(370, 215);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+	
+	
+	
+	/**
+	 * Launch the application.
+	 */
+
 
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
-	public ShowYolo() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 419, 445);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(170, 129, 173, 107);
-		contentPane.add(scrollPane);
-		
-		final JTextPane textPane = new JTextPane();
-		scrollPane.setViewportView(textPane);
-		
-		final JComboBox comboBox = new JComboBox(areaNames);
-		comboBox.setForeground(Color.YELLOW);
-		comboBox.setBackground(Color.BLACK);
-		comboBox.setBounds(206, 28, 106, 27);
-		contentPane.add(comboBox);
-		//comboBox.setEditable(true);
-		//comboBox.setOpaque(false);
-		comboBox.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				textPane.setText(getTitle(comboBox.getSelectedItem().toString()));
-				System.out.println(comboBox.getSelectedItem().toString());
-				textPane.setCaretPosition(0);
-			}	
-		});
-		
-		
-		createParser();
-		//textPane.setText(getTitle());
-		
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Desktop\\liten battis.png"));
-		lblNewLabel_1.setBounds(185, 0, 150, 84);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Hedvig\\Desktop\\batman klar.png"));
-		lblNewLabel.setBounds(0, 0, 400, 400);
-		contentPane.add(lblNewLabel);
+	public void SplashScreen() {
+
 		
 		
 		
